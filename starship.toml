@@ -1,0 +1,28 @@
+right_format = """$time"""
+
+[env_var.ENV_NAME]
+format="with $symbol [$env_value](white bold)"
+symbol="🚀"
+
+[env_var.DEPLOY_ENV]
+format="\\(([$env_value](white))\\) "
+
+[package]
+disabled=true
+
+[time]
+disabled=false
+
+[custom.slsjest]
+#when="test (jq '.devDependencies.\"sls-jest\"' $PWD/package.json) != null"
+when="ll node_modules/sls-jest"
+symbol="🧪 "
+command="set -q SLS_JEST_TAG && echo $SLS_JEST_TAG || git rev-parse --abbrev-ref HEAD"
+
+[custom.serverless]
+detect_files=["serverless.yml"]
+symbol="⚡"
+command="yq .service serverless.yml"
+
+[container]
+disabled=true
